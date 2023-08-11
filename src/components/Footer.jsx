@@ -34,13 +34,6 @@ const Footer = () => {
               <FaYoutube />
             </li>
           </ul>
-          <div className="inps">
-            <select name="language" className="language">
-              <option value="en">English</option>
-              <option value="az">Azərbaycanca</option>
-              <option value="tr">Türkçe</option>
-            </select>
-          </div>
         </div>
       </div>
     </footer>
