@@ -10,7 +10,10 @@ import { useContext } from "react";
 import { Auth } from "../utils/Auth";
 
 const Header = () => {
+  //?Auth
   const { token, logOut } = useContext(Auth)
+  //?Auth
+
   return (
     <header className="header">
       <div className="container">

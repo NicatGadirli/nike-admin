@@ -8,8 +8,11 @@ import Swal from 'sweetalert2'
 
 
 const AllProducts = () => {
+  //?UseState
   const [data, setData] = useState([]);
+  //?UseState
 
+  //!Products
   useEffect(() => {
     getAllProducts();
   }, []);
@@ -22,8 +25,9 @@ const AllProducts = () => {
       console.log(error);
     }
   };
+    //!Products
 
-  //Delete Product from Backend
+  //?Delete Product from Backend
   const removeProduct = async (productID) => {
     Swal.fire({
       title: 'Ürün silmek istediyinizden eminmisiniz?',
@@ -51,6 +55,7 @@ const AllProducts = () => {
       }
     });
   };
+  //?Delete Product from Backend
 
   return (
     <section className="allProducts">

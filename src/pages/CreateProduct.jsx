@@ -6,22 +6,31 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const CreateProduct = () => {
+  //?Navigate
   const navigate = useNavigate();
+  //?Navigate
 
+  //!UseState
   const [image, setImage] = useState(null);
   const [imgErr, setImgErr] = useState("");
   const [preview, setPreview] = useState("");
+  //!UseState
 
+  //?Schema
   const productSchema = object({
     name: string().required("Lütfen bu alanı doldurun.").trim(),
     details: string().required("Lütfen bu alanı doldurun.").trim(),
     price: string().required("Lütfen bu alanı doldurun.").trim().matches(/^\d+$/, "Sadece Rakamlar"),
   });
+  //?Schema
 
+  //! React Hook Form
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(productSchema),
   });
+  //! React Hook Form
 
+  //?Take Photo 
   const handleImage = (e) => {
     setImgErr("");
     const file = e.target.files[0];
@@ -35,7 +44,10 @@ const CreateProduct = () => {
       console.log(error);
     };
   };
+  //?Take Photo 
 
+  
+  
   const onSubmit = async (data) => {
     if (image === null) {
       setImgErr("Fotoğraf Seçin.");

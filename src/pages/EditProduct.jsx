@@ -4,26 +4,38 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
 const EditProduct = () => {
+  //!Navigate
   const navigate = useNavigate()
+  //!Navigate
+
+  //?UseState
   const [preview, setPreview] = useState("")
   const [image, setImage] = useState(null)
   const [product, setProduct] = useState({})
+  //?UseState
+
+  //!Params
   const { productId } = useParams()
+  //!Params
 
+  //?GetSingle Product 
   useEffect(() => {
+    const getSingleProduct = async () => {
+      await axios
+        .get(`${process.env.REACT_APP_ALL_DATA}/${productId}`)
+        .then(res => {
+          setProduct(res.data);
+        }).catch(err => {
+          console.log(err);
+        })
+    };
     getSingleProduct()
-  }, [])
+  }, [productId])
+  
 
-  const getSingleProduct = async () => {
-    await axios
-      .get(`${process.env.REACT_APP_ALL_DATA}/${productId}`)
-      .then(res => {
-        setProduct(res.data);
-      }).catch(err => {
-        console.log(err);
-      })
-  };
+  //?GetSingle Product 
 
+  //!Get Photo
   const handleImage = (e) => {
     let file = e.target.files[0]
     setImage(file)
@@ -37,7 +49,10 @@ const EditProduct = () => {
       console.log(error);
     }
   }
+  //!Get Photo
 
+
+  //? React Hook Form
   const { register, handleSubmit } = useForm({
     defaultValues: {
       name: product.name,
@@ -45,6 +60,7 @@ const EditProduct = () => {
       price: product.price,
     }
   });
+  //? React Hook Form
 
 
   const onSubmit = async (data) => {

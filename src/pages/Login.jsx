@@ -1,45 +1,52 @@
-/* ---------------------------------- React --------------------------------- */
+//React 
 import { useContext } from "react";
 
-/* --------------------------------- Router --------------------------------- */
+//Router 
 import { useNavigate } from "react-router-dom";
 
-/* ------------------------- React Hook Form && Yup ------------------------- */
+//React Hook Form && Yup
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { object, string } from "yup";
 
-/* --------------------------------- Context -------------------------------- */
+// Context 
 import { Auth } from "../utils/Auth";
 
 
 const Login = () => {
-  /* --------------------------------- Context -------------------------------- */
+  //!Auth
   const { setToken } = useContext(Auth);
-  /* -------------------------------- Navigate -------------------------------- */
+  //!Auth
+
+  //?Navigate 
   const navigate = useNavigate();
+  //?Navigate 
 
 
-  /* --------------------------------- Schema --------------------------------- */
+  //!Schema 
   const registerSchema = object({
     email: string().required().trim().email(),
     password: string().required().trim().min(8).max(18),
   });
+  //!Schema 
 
-  /* ----------------------------- React Hook Form ---------------------------- */
+
+  //? React Hook Form 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(registerSchema) });
+  //? React Hook Form 
 
 
-
-  /* --------------------------------- Confirm -------------------------------- */
+  //!Confirm 
   const onSubmit = (data) => {
     navigate("/");
     setToken(true);
   };
+  //!Confirm 
+
   return (
     <section className="login">
       <div className="container">
@@ -50,18 +57,18 @@ const Login = () => {
               noValidate
               onSubmit={handleSubmit(onSubmit)}>
               <div className="user-box">
-                <input 
-                type="email" 
-                name="email"  
-                {...register("email")} />
+                <input
+                  type="email"
+                  name="email"
+                  {...register("email")} />
                 <label>Email</label>
               </div>
               {errors.email && <span className="errorMsg">{errors.email.message}</span>}
               <div className="user-box">
-                <input 
-                type="password" 
-                name="password" 
-                {...register("password")} />
+                <input
+                  type="password"
+                  name="password"
+                  {...register("password")} />
                 <label>Password</label>
               </div>
               {errors.password && <span className="errorMsg">{errors.password.message}</span>}
